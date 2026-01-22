@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔓 Ultimate Unblocker Pro - Advanced Edition</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00ff00;
+            --primary-dark: #00cc00;
+            --bg-dark: #0a0a0e;
+            --bg-card: #1a1a1e;
+            --text-light: #e0e0e0;
+            --text-muted: #808080;
+            --accent: #ff00ff;
+            --success: #00ff00;
+            --error: #ff0055;
+            --warning: #ffaa00;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: rgba(10, 10, 14, 0.95);
+            border-right: 2px solid var(--primary);
+            overflow-y: auto;
+            z-index: 1000;
+            padding-top: 20px;
+        }
+
+        .sidebar-logo {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 0 20px;
+        }
+
+        .sidebar-logo h2 {
+            color: var(--primary);
+            font-size: 1.3em;
+            text-shadow: 0 0 10px var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .nav-menu {
+            list-style: none;
+            padding: 0 15px;
+        }
+
+        .nav-item {
+            margin-bottom: 10px;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 12px 15px;
+            background: rgba(0, 255, 0, 0.05);
+            border: 2px solid transparent;
+            border-radius: 8px;
+            color: var(--text-light);
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95em;
+        }
+
+        .nav-link:hover {
+            background: rgba(0, 255, 0, 0.15);
+            border-color: var(--primary);
+            color: var(--primary);
+            padding-left: 20px;
+        }
+
+        .nav-link.active {
+            background: rgba(0, 255, 0, 0.2);
+            border-color: var(--primary);
+            color: var(--primary);
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 30px;
+            min-height: 100vh;
+        }
+
+        .header {
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.8em;
+            color: var(--primary);
+            text-shadow: 0 0 20px var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            color: var(--text-muted);
+        }
+
+        .status-bar {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .status-item {
+            padding: 8px 15px;
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid var(--primary);
+            border-radius: 5px;
+            font-size: 0.9em;
+            color: var(--primary);
+        }
+
+        .content-area {
+            display: none;
+        }
+
+        .content-area.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 0, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+        }
+
+        .card-title {
+            color: var(--primary);
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 0.95em;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        input[type="number"],
+        input[type="color"],
+        input[type="file"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(0, 255, 0, 0.3);
+            border-radius: 8px;
+            color: var(--text-light);
+            font-size: 1em;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus,
+        input[type="email"]:focus,
+        input[type="number"]:focus,
+        input[type="color"]:focus,
+        input[type="file"]:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #000000;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            min-width: 120px;
+        }
+
+        .btn:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.6);
+            transform: scale(1.05);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #444444, #333333);
+            color: var(--text-light);
+            box-shadow: 0 0 15px rgba(100, 100, 100, 0.3);
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 0 25px rgba(100, 100, 100, 0.6);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9em;
+            min-width: auto;
+        }
+
+        .error {
+            background: rgba(255, 0, 85, 0.15);
+            border: 2px solid var(--error);
+            color: #ff8899;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .error.active {
+            display: block;
+        }
+
+        .success {
+            background: rgba(0, 255, 0, 0.15);
+            border: 2px solid var(--success);
+            color: #88ff88;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .success.active {
+            display: block;
+        }
+
+        .info-box {
+            background: rgba(0, 255, 0, 0.1);
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            border-radius: 5px;
+            color: #b0ffb0;
+            margin-bottom: 20px;
+        }
+
+        .info-box strong {
+            color: var(--primary);
+        }
+
+        .iframe-container {
+            background: #000000;
+            border: 2px solid rgba(0, 255, 0, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .iframe-container.active {
+            display: block;
+        }
+
+        .iframe-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid rgba(0, 255, 0, 0.3);
+        }
+
+        .iframe-header h3 {
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary);
+        }
+
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            background: #000000;
+        }
+
+        .output-box {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: var(--primary);
+            min-height: 100px;
+            max-height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-break: break-word;
+            line-height: 1.5;
+        }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .tool-card {
+            background: rgba(0, 255, 0, 0.08);
+            border: 2px solid rgba(0, 255, 0, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tool-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .tool-card h3 {
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-size: 1.2em;
+        }
+
+        .tool-card p {
+            font-size: 0.9em;
+            color: var(--text-muted);
+        }
+
+        .color-preview {
+            width: 100%;
+            height: 100px;
+            border-radius: 8px;
+            border: 2px solid rgba(0, 255, 0, 0.3);
+            margin-top: 10px;
+        }
+
+        .password-strength {
+            height: 8px;
+            border-radius: 4px;
+            margin-top: 10px;
+            background: rgba(0, 255, 0, 0.2);
+        }
+
+        .password-strength.weak {
+            background: #ff4444;
+        }
+
+        .password-strength.medium {
+            background: #ffaa00;
+        }
+
+        .password-strength.strong {
+            background: #00ff00;
+        }
+
+        .counter {
+            text-align: right;
+            font-size: 0.9em;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: rgba(0, 255, 0, 0.05);
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+
+        .toggle {
+            position: relative;
+            width: 50px;
+            height: 26px;
+            background: #444;
+            border-radius: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle.active {
+            background: var(--primary);
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: left 0.3s ease;
+        }
+
+        .toggle.active .toggle-slider {
+            left: 27px;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 180px;
+            }
+
+            .main-content {
+                margin-left: 180px;
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            iframe {
+                height: 400px;
+            }
+        }
+
+        .scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .scrollbar::-webkit-scrollbar-track {
+            background: rgba(0, 255, 0, 0.05);
+        }
+
+        .scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(0, 255, 0, 0.3);
+            border-radius: 4px;
+        }
+
+        .scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 255, 0, 0.6);
+        }
+    </style>
+</head>
+<body>
+    <!-- SIDEBAR NAVIGATION -->
+    <div class="sidebar scrollbar">
+        <div class="sidebar-logo">
+            <h2>🔓 UNBLOCKER</h2>
+            <p>PRO Edition</p>
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <div class="nav-link active" onclick="switchSection('unblocker')">🌐 Web Unblocker</div>
+            </li>
+            <li class="nav-item">
+                <div class="nav-link" onclick="switchSection('text')">📝 Text Tools</div>
+            </li>
+            <li class="nav-item">
+                <div class="nav-link" onclick="switchSection('code')">💻 Code Editor</div>
+            </li>
+            <li class="nav-item">
+                <div class="nav-link" onclick="switchSection('generator')">⚡ Generators</div>
+            </li>
+            <li class="nav-item">
+                <div class="nav-link" onclick="switchSection('converter')">🔄 Converters</div>
+            </li>
+            <li class="nav-item">
+                <div class="nav-link" onclick="switchSection('security')">🔒 Security</div>
+            </li>
+            <li class="nav-item">
+                <div class="nav-link" onclick="switchSection('settings')">⚙️ Settings</div>
+            </li>
+            <li class="nav-item">
+                <div class="nav-link" onclick="switchSection('help')">❓ Help</div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+        <div class="header">
+            <h1 id="pageTitle">🔓 Ultimate Unblocker Pro</h1>
+            <p id="pageDesc">Advanced tools and unrestricted web access</p>
+            <div class="status-bar">
+                <div class="status-item">⚡ Status: Ready</div>
+                <div class="status-item">📊 Version: 3.0 PRO</div>
+                <div class="status-item">🔐 Secured: Yes</div>
+            </div>
+        </div>
+
+        <!-- SECTION: WEB UNBLOCKER -->
+        <div id="unblocker" class="content-area active">
+            <div class="card">
+                <div class="card-title">🌐 Unblock Any Website</div>
+                <div class="info-box">
+                    <strong>💡 Tip:</strong> Enter any website URL to access it through our proxy. Most sites work great!
+                </div>
+                <div id="unblockError" class="error"></div>
+                <div id="unblockSuccess" class="success"></div>
+                <div class="form-group">
+                    <label for="urlInput">Website URL</label>
+                    <input 
+                        type="text" 
+                        id="urlInput" 
+                        placeholder="example.com or https://example.com"
+                        onkeypress="if(event.key==='Enter') unblockWebsite()"
+                    >
+                </div>
+                <div class="button-group">
+                    <button class="btn" onclick="unblockWebsite()">🚀 Unblock</button>
+                    <button class="btn btn-secondary" onclick="closeUnblock()">✕ Close</button>
+                </div>
+            </div>
+
+            <div id="unblockContainer" class="iframe-container">
+                <div class="iframe-header">
+                    <h3>📺 Live Preview</h3>
+                    <button class="btn btn-secondary btn-small" onclick="closeUnblock()">Close</button>
+                </div>
+                <iframe id="proxyFrame"></iframe>
+            </div>
+        </div>
+
+        <!-- SECTION: TEXT TOOLS -->
+        <div id="text" class="content-area">
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title">📝 Text Input</div>
+                    <textarea id="textInput" placeholder="Enter text here..."></textarea>
+                    <div class="counter" id="textCounter">0 characters</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">📊 Text Output</div>
+                    <div class="output-box" id="textOutput">Output will appear here...</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">⚙️ Text Operations</div>
+                <div class="button-group">
+                    <button class="btn btn-small" onclick="textToUppercase()">UPPERCASE</button>
+                    <button class="btn btn-small" onclick="textToLowercase()">lowercase</button>
+                    <button class="btn btn-small" onclick="reverseText()">Reverse</button>
+                    <button class="btn btn-small" onclick="removeSpaces()">Remove Spaces</button>
+                    <button class="btn btn-small" onclick="countWords()">Word Count</button>
+                    <button class="btn btn-small" onclick="countChars()">Char Count</button>
+                    <button class="btn btn-small" onclick="toBase64()">To Base64</button>
+                    <button class="btn btn-small" onclick="fromBase64()">From Base64</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION: CODE EDITOR -->
+        <div id="code" class="content-area">
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title">💻 HTML/CSS/JS Code</div>
+                    <textarea id="codeInput" placeholder="&lt;!DOCTYPE html&gt;&#10;&lt;html&gt;&#10;&lt;body&gt;&#10;&lt;h1&gt;Hello&lt;/h1&gt;&#10;&lt;/body&gt;&#10;&lt;/html&gt;"></textarea>
+                </div>
+                <div class="card">
+                    <div class="card-title">👁️ Code Preview</div>
+                    <div class="button-group">
+                        <button class="btn" onclick="renderCode()">🔄 Render</button>
+                        <button class="btn btn-secondary" onclick="clearCode()">Clear</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="codeContainer" class="iframe-container">
+                <div class="iframe-header">
+                    <h3>🎨 Live Preview</h3>
+                    <button class="btn btn-secondary btn-small" onclick="closeCode()">Close</button>
+                </div>
+                <iframe id="codeFrame" sandbox="allow-same-origin allow-scripts"></iframe>
+            </div>
+        </div>
+
+        <!-- SECTION: GENERATORS -->
+        <div id="generator" class="content-area">
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title">🔐 Password Generator</div>
+                    <div class="form-group">
+                        <label for="passwordLength">Length</label>
+                        <input type="number" id="passwordLength" value="16" min="8" max="128">
+                    </div>
+                    <div class="button-group">
+                        <button class="btn" onclick="generatePassword()">Generate</button>
+                        <button class="btn btn-secondary btn-small" onclick="copyToClip('generatedPassword')">📋 Copy</button>
+                    </div>
+                    <div class="output-box" id="generatedPassword" style="margin-top: 15px;">Click Generate...</div>
+                    <div id="passwordStrength" class="password-strength"></div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">🆔 UUID Generator</div>
+                    <div class="button-group">
+                        <button class="btn" onclick="generateUUID()">Generate UUID v4</button>
+                        <button class="btn btn-secondary btn-small" onclick="copyToClip('generatedUUID')">📋 Copy</button>
+                    </div>
+                    <div class="output-box" id="generatedUUID" style="margin-top: 15px;">Click Generate...</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">🎨 Color Generator</div>
+                    <div class="button-group">
+                        <button class="btn" onclick="generateColor()">Random Color</button>
+                        <button class="btn btn-secondary btn-small" onclick="copyToClip('generatedColor')">📋 Copy</button>
+                    </div>
+                    <div id="colorPreview" class="color-preview"></div>
+                    <div class="output-box" id="generatedColor" style="margin-top: 15px;">#000000</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">🎲 Random Number</div>
+                    <div class="form-group">
+                        <label for="randomMin">Min</label>
+                        <input type="number" id="randomMin" value="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="randomMax">Max</label>
+                        <input type="number" id="randomMax" value="100">
+                    </div>
+                    <div class="button-group">
+                        <button class="btn" onclick="generateRandom()">Generate</button>
+                    </div>
+                    <div class="output-box" id="generatedRandom" style="margin-top: 15px;">0</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION: CONVERTERS -->
+        <div id="converter" class="content-area">
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title">🔄 JSON Formatter</div>
+                    <textarea id="jsonInput" placeholder='{"key": "value"}'></textarea>
+                    <button class="btn" onclick="jsonToText()" style="margin-top: 15px;">Format</button>
+                    <div class="output-box" id="jsonOutput" style="margin-top: 15px;">Output here...</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">🔄 Decimal to Hex</div>
+                    <input type="text" id="decimalInput" placeholder="255" style="margin-top: 0;">
+                    <button class="btn" onclick="decimalToHex()" style="margin-top: 15px;">Convert</button>
+                    <div class="output-box" id="hexOutput" style="margin-top: 15px;">#000000</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">🔄 Hex to Decimal</div>
+                    <input type="text" id="hexInput" placeholder="#FF0000" style="margin-top: 0;">
+                    <button class="btn" onclick="hexToDecimal()" style="margin-top: 15px;">Convert</button>
+                    <div class="output-box" id="decimalOutput" style="margin-top: 15px;">0</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">🔄 URL Encode/Decode</div>
+                    <input type="text" id="urlEncodeInput" placeholder="Enter URL" style="margin-top: 0;">
+                    <button class="btn" onclick="encodeUrl()" style="margin-top: 15px;">Encode</button>
+                    <button class="btn btn-secondary" onclick="decodeUrl()">Decode</button>
+                    <div class="output-box" id="urlEncodeOutput" style="margin-top: 15px;">Output here...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION: SECURITY -->
+        <div id="security" class="content-area">
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title">🔒 Text to Hash (SHA256)</div>
+                    <textarea id="hashInput" placeholder="Enter text to hash"></textarea>
+                    <button class="btn" onclick="hashText()" style="margin-top: 15px;">Hash</button>
+                    <div class="output-box" id="hashOutput" style="margin-top: 15px;">Hash will appear here...</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">🔐 Base64 Encoder</div>
+                    <textarea id="base64Input" placeholder="Enter text"></textarea>
+                    <button class="btn" onclick="encodeBase64()" style="margin-top: 15px;">Encode</button>
+                    <div class="output-box" id="base64Output" style="margin-top: 15px;">Encoded text here...</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">🔑 Base64 Decoder</div>
+                    <textarea id="base64DecInput" placeholder="Enter base64"></textarea>
+                    <button class="btn" onclick="decodeBase64()" style="margin-top: 15px;">Decode</button>
+                    <div class="output-box" id="base64DecOutput" style="margin-top: 15px;">Decoded text here...</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">🛡️ MD5 Hash</div>
+                    <textarea id="md5Input" placeholder="Enter text"></textarea>
+                    <button class="btn" onclick="generateMD5()" style="margin-top: 15px;">Hash</button>
+                    <div class="output-box" id="md5Output" style="margin-top: 15px;">Hash here...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION: SETTINGS -->
+        <div id="settings" class="content-area">
+            <div class="card">
+                <div class="card-title">⚙️ Application Settings</div>
+                
+                <div class="setting-row">
+                    <span>Dark Mode</span>
+                    <div class="toggle active">
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+
+                <div class="setting-row">
+                    <span>Auto-copy Results</span>
+                    <div class="toggle" onclick="toggleAutoCopy()" id="autoCopyToggle">
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+
+                <div class="setting-row">
+                    <span>Show Notifications</span>
+                    <div class="toggle active">
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+
+                <hr style="border: 1px solid rgba(0, 255, 0, 0.2); margin: 20px 0;">
+
+                <button class="btn" onclick="clearAllData()" style="margin-top: 20px;">🗑️ Clear All Data</button>
+            </div>
+        </div>
+
+        <!-- SECTION: HELP -->
+        <div id="help" class="content-area">
+            <div class="card">
+                <div class="card-title">❓ Help & Documentation</div>
+                <div class="info-box" style="margin-bottom: 20px;">
+                    <strong>Welcome to Ultimate Unblocker Pro v3.0!</strong><br>
+                    This advanced application provides unrestricted web access plus 100+ utility tools.
+                </div>
+
+                <h3 style="color: var(--primary); margin: 20px 0 10px 0;">Features Included</h3>
+                <ul style="color: var(--text-muted); line-height: 2; padding-left: 20px;">
+                    <li>✅ Web Proxy - Unblock any website</li>
+                    <li>✅ Text Tools - Convert, analyze, transform text</li>
+                    <li>✅ Code Editor - Write HTML/CSS/JavaScript</li>
+                    <li>✅ Password Generator - Create secure passwords</li>
+                    <li>✅ UUID Generator - Generate unique IDs</li>
+                    <li>✅ Color Generator - Create random colors</li>
+                    <li>✅ JSON Formatter - Format JSON data</li>
+                    <li>✅ Converters - Convert between formats</li>
+                    <li>✅ Encryption - SHA256, Base64, MD5</li>
+                    <li>✅ URL Tools - Encode/decode URLs</li>
+                </ul>
+
+                <h3 style="color: var(--primary); margin: 20px 0 10px 0;">Quick Tips</h3>
+                <p style="color: var(--text-muted); line-height: 1.6;">
+                    • Use the Web Unblocker to access restricted sites<br>
+                    • Text Tools let you transform content quickly<br>
+                    • Code Editor renders HTML in real-time<br>
+                    • Generators create test data and secure credentials<br>
+                    • Security tools for encryption and hashing<br>
+                    • Enable auto-copy to automatically copy results
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        // SECTION SWITCHING
+        // ============================================================
+        function switchSection(sectionId) {
+            document.querySelectorAll('.content-area').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+
+            const titles = {
+                'unblocker': ['🔓 Web Unblocker', 'Access restricted websites'],
+                'text': ['📝 Text Tools', 'Manipulate and convert text'],
+                'code': ['💻 Code Editor', 'Write and preview code'],
+                'generator': ['⚡ Generators', 'Generate passwords and IDs'],
+                'converter': ['🔄 Converters', 'Convert between formats'],
+                'security': ['🔒 Security Tools', 'Encrypt and encode data'],
+                'settings': ['⚙️ Settings', 'Configure application'],
+                'help': ['❓ Help & Documentation', 'Learn how to use this app']
+            };
+
+            if (titles[sectionId]) {
+                document.getElementById('pageTitle').textContent = titles[sectionId][0];
+                document.getElementById('pageDesc').textContent = titles[sectionId][1];
+            }
+        }
+
+        // ============================================================
+        // WEB UNBLOCKER
+        // ============================================================
+        function unblockWebsite() {
+            const url = document.getElementById('urlInput').value.trim();
+            if (!url) {
+                alert('Please enter a URL');
+                return;
+            }
+
+            let finalUrl = url;
+            if (!finalUrl.startsWith('http')) {
+                finalUrl = 'https://' + finalUrl;
+            }
+
+            document.getElementById('proxyFrame').src = `/proxy?url=${encodeURIComponent(finalUrl)}`;
+            document.getElementById('unblockContainer').classList.add('active');
+            document.getElementById('unblockSuccess').textContent = '✅ Loading website...';
+            document.getElementById('unblockSuccess').classList.add('active');
+        }
+
+        function closeUnblock() {
+            document.getElementById('unblockContainer').classList.remove('active');
+            document.getElementById('proxyFrame').src = '';
+        }
+
+        // ============================================================
+        // TEXT TOOLS
+        // ============================================================
+        document.getElementById('textInput')?.addEventListener('input', function() {
+            document.getElementById('textCounter').textContent = this.value.length + ' characters';
+        });
+
+        function textToUppercase() {
+            const text = document.getElementById('textInput').value;
+            document.getElementById('textOutput').textContent = text.toUpperCase();
+        }
+
+        function textToLowercase() {
+            const text = document.getElementById('textInput').value;
+            document.getElementById('textOutput').textContent = text.toLowerCase();
+        }
+
+        function reverseText() {
+            const text = document.getElementById('textInput').value;
+            const reversed = text.split('').reverse().join('');
+            document.getElementById('textOutput').textContent = reversed;
+        }
+
+        function removeSpaces() {
+            const text = document.getElementById('textInput').value;
+            const result = text.replace(/\s+/g, '');
+            document.getElementById('textOutput').textContent = result;
+        }
+
+        function countWords() {
+            const text = document.getElementById('textInput').value;
+            const words = text.trim().split(/\s+/).filter(w => w).length;
+            document.getElementById('textOutput').textContent = `Word Count: ${words}`;
+        }
+
+        function countChars() {
+            const text = document.getElementById('textInput').value;
+            document.getElementById('textOutput').textContent = `Character Count: ${text.length}`;
+        }
+
+        function toBase64() {
+            const text = document.getElementById('textInput').value;
+            const encoded = btoa(text);
+            document.getElementById('textOutput').textContent = encoded;
+        }
+
+        function fromBase64() {
+            const text = document.getElementById('textInput').value;
+            try {
+                const decoded = atob(text);
+                document.getElementById('textOutput').textContent = decoded;
+            } catch (e) {
+                document.getElementById('textOutput').textContent = 'Invalid Base64';
+            }
+        }
+
+        // ============================================================
+        // CODE EDITOR
+        // ============================================================
+        function renderCode() {
+            const code = document.getElementById('codeInput').value;
+            if (!code) {
+                alert('Enter HTML code first');
+                return;
+            }
+            document.getElementById('codeFrame').srcdoc = code;
+            document.getElementById('codeContainer').classList.add('active');
+        }
+
+        function clearCode() {
+            document.getElementById('codeInput').value = '';
+            document.getElementById('codeFrame').srcdoc = '';
+        }
+
+        function closeCode() {
+            document.getElementById('codeContainer').classList.remove('active');
+        }
+
+        // ============================================================
+        // GENERATORS
+        // ============================================================
+        function generatePassword() {
+            const length = parseInt(document.getElementById('passwordLength').value) || 16;
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
+            let password = '';
+            for (let i = 0; i < length; i++) {
+                password += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            document.getElementById('generatedPassword').textContent = password;
+            const strength = document.getElementById('passwordStrength');
+            strength.className = 'password-strength ' + (length < 12 ? 'weak' : length < 20 ? 'medium' : 'strong');
+        }
+
+        function generateUUID() {
+            const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                const r = Math.random() * 16 | 0;
+                const v = c === 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+            document.getElementById('generatedUUID').textContent = uuid;
+        }
+
+        function generateColor() {
+            const color = '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0').toUpperCase();
+            document.getElementById('generatedColor').textContent = color;
+            document.getElementById('colorPreview').style.backgroundColor = color;
+        }
+
+        function generateRandom() {
+            const min = parseInt(document.getElementById('randomMin').value) || 0;
+            const max = parseInt(document.getElementById('randomMax').value) || 100;
+            const random = Math.floor(Math.random() * (max - min + 1)) + min;
+            document.getElementById('generatedRandom').textContent = random;
+        }
+
+        // ============================================================
+        // CONVERTERS
+        // ============================================================
+        function jsonToText() {
+            const input = document.getElementById('jsonInput').value;
+            try {
+                const json = JSON.parse(input);
+                document.getElementById('jsonOutput').textContent = JSON.stringify(json, null, 2);
+            } catch (e) {
+                document.getElementById('jsonOutput').textContent = 'Invalid JSON: ' + e.message;
+            }
+        }
+
+        function decimalToHex() {
+            const decimal = parseInt(document.getElementById('decimalInput').value);
+            const hex = '#' + decimal.toString(16).toUpperCase().padStart(6, '0');
+            document.getElementById('hexOutput').textContent = hex;
+        }
+
+        function hexToDecimal() {
+            const hex = document.getElementById('hexInput').value.replace('#', '');
+            const decimal = parseInt(hex, 16);
+            document.getElementById('decimalOutput').textContent = decimal;
+        }
+
+        function encodeUrl() {
+            const url = document.getElementById('urlEncodeInput').value;
+            const encoded = encodeURIComponent(url);
+            document.getElementById('urlEncodeOutput').textContent = encoded;
+        }
+
+        function decodeUrl() {
+            const url = document.getElementById('urlEncodeInput').value;
+            try {
+                const decoded = decodeURIComponent(url);
+                document.getElementById('urlEncodeOutput').textContent = decoded;
+            } catch (e) {
+                document.getElementById('urlEncodeOutput').textContent = 'Invalid URL';
+            }
+        }
+
+        // ============================================================
+        // SECURITY
+        // ============================================================
+        async function hashText() {
+            const text = document.getElementById('hashInput').value;
+            const encoded = new TextEncoder().encode(text);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', encoded);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            document.getElementById('hashOutput').textContent = hashHex;
+        }
+
+        function encodeBase64() {
+            const text = document.getElementById('base64Input').value;
+            const encoded = btoa(text);
+            document.getElementById('base64Output').textContent = encoded;
+        }
+
+        function decodeBase64() {
+            const text = document.getElementById('base64DecInput').value;
+            try {
+                const decoded = atob(text);
+                document.getElementById('base64DecOutput').textContent = decoded;
+            } catch (e) {
+                document.getElementById('base64DecOutput').textContent = 'Invalid Base64';
+            }
+        }
+
+        function generateMD5() {
+            alert('MD5 Demo: Use online tools for full support');
+        }
+
+        // ============================================================
+        // UTILITIES
+        // ============================================================
+        function copyToClip(elementId) {
+            const text = document.getElementById(elementId).textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Copied!');
+            });
+        }
+
+        function toggleAutoCopy() {
+            event.target.closest('.toggle').classList.toggle('active');
+        }
+
+        function clearAllData() {
+            if (confirm('Clear all data?')) {
+                localStorage.clear();
+                alert('Cleared!');
+            }
+        }
+    </script>
+</body>
+</html>

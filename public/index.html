@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Unblocker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1e 100%);
+            color: #00ff00;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #00ff00;
+            text-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            color: #00cc00;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
+        .tagline {
+            color: #666;
+            font-size: 0.9em;
+            font-style: italic;
+        }
+
+        .container {
+            background: rgba(51, 51, 51, 0.95);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 40px rgba(0, 255, 0, 0.2), inset 0 0 20px rgba(0, 0, 0, 0.5);
+            border: 2px solid #00ff00;
+            width: 100%;
+            max-width: 700px;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            color: #00cc00;
+            font-weight: bold;
+            font-size: 1.05em;
+        }
+
+        input[type="text"] {
+            padding: 15px 20px;
+            border: 2px solid #00ff00;
+            border-radius: 8px;
+            background: #222;
+            color: #00ff00;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #00ff00;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+            background: #1a1a1a;
+        }
+
+        input[type="text"]::placeholder {
+            color: #666;
+        }
+
+        button {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #00ff00, #00cc00);
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(0, 255, 0, 0.6);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .disclaimer {
+            background: rgba(255, 152, 0, 0.1);
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            color: #ccc;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+
+        .iframe-container {
+            background: rgba(51, 51, 51, 0.95);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 40px rgba(0, 255, 0, 0.2);
+            border: 2px solid #00ff00;
+            width: 100%;
+            max-width: 900px;
+            display: none;
+            margin-top: 20px;
+        }
+
+        .frame-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #00ff00;
+        }
+
+        .frame-title {
+            color: #00ff00;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .frame-url {
+            color: #00cc00;
+            font-size: 0.9em;
+            word-break: break-all;
+        }
+
+        .close-btn {
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: #ff6666;
+        }
+
+        .loading-message {
+            background: rgba(255, 152, 0, 0.1);
+            border: 2px solid #ff9800;
+            color: #ff9800;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            text-align: center;
+            display: none;
+            animation: pulse 1s infinite;
+        }
+
+        .error-message {
+            background: rgba(244, 67, 54, 0.1);
+            border: 2px solid #f44336;
+            color: #f44336;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            text-align: center;
+            display: none;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        iframe {
+            width: 100%;
+            height: 65vh;
+            border: none;
+            border-radius: 8px;
+            background: white;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            .container {
+                padding: 20px;
+            }
+            iframe {
+                height: 50vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER SECTION -->
+    <div class="header">
+        <h1>🔓 Ultimate Unblocker</h1>
+        <div class="subtitle">Access Any Website</div>
+        <div class="tagline">Fast. Secure. No installation required.</div>
+    </div>
+
+    <!-- INPUT SECTION -->
+    <div class="container">
+        <div class="input-group">
+            <label for="urlInput">🌐 Enter Website URL:</label>
+            <input 
+                type="text" 
+                id="urlInput" 
+                placeholder="e.g., google.com or https://example.com"
+                onkeypress="if(event.key === 'Enter') unblock()"
+            >
+        </div>
+
+        <button onclick="unblock()">⚡ Unblock Website</button>
+
+        <div class="disclaimer">
+            <strong>⚠️ Educational Purpose Only:</strong> This tool is for learning about web proxies and networking. 
+            Use responsibly and ethically. We are not responsible for misuse or consequences. 
+            Always respect website terms of service and local laws.
+        </div>
+    </div>
+
+    <!-- IFRAME DISPLAY SECTION -->
+    <div class="iframe-container" id="iframeContainer">
+        <div class="frame-header">
+            <div>
+                <div class="frame-title">📄 Proxied Content</div>
+                <div class="frame-url" id="currentUrl"></div>
+            </div>
+            <button class="close-btn" onclick="closeFrame()">✕ Close</button>
+        </div>
+
+        <div id="loadingMessage" class="loading-message">⏳ Loading... Please wait</div>
+        <div id="errorMessage" class="error-message"></div>
+
+        <iframe id="proxyFrame" title="Unblocked Website Content"></iframe>
+    </div>
+
+    <script>
+        // FUNCTION: Main unblock handler
+        function unblock() {
+            let url = document.getElementById('urlInput').value.trim();
+
+            // Validation: Check if URL is empty
+            if (!url) {
+                showError('❌ Please enter a URL');
+                return;
+            }
+
+            // Validation: Add https:// if no protocol provided
+            if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                url = 'https://' + url;
+                document.getElementById('urlInput').value = url;
+            }
+
+            // Show the iframe container
+            document.getElementById('iframeContainer').style.display = 'block';
+            document.getElementById('currentUrl').textContent = url;
+            showLoading();
+
+            // Set the iframe source to the proxy endpoint
+            // The /proxy endpoint in server.js will handle everything
+            document.getElementById('proxyFrame').src = `/proxy?url=${encodeURIComponent(url)}`;
+        }
+
+        // FUNCTION: Show loading indicator
+        function showLoading() {
+            document.getElementById('loadingMessage').style.display = 'block';
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+
+        // FUNCTION: Show error message
+        function showError(message) {
+            document.getElementById('errorMessage').textContent = message;
+            document.getElementById('errorMessage').style.display = 'block';
+            document.getElementById('loadingMessage').style.display = 'none';
+        }
+
+        // FUNCTION: Close the iframe
+        function closeFrame() {
+            document.getElementById('iframeContainer').style.display = 'none';
+            document.getElementById('proxyFrame').src = 'about:blank';
+            document.getElementById('urlInput').value = '';
+        }
+
+        // EVENT: Hide loading when iframe loads
+        document.getElementById('proxyFrame').onload = function() {
+            document.getElementById('loadingMessage').style.display = 'none';
+        };
+
+        // EVENT: Show error if iframe fails to load
+        document.getElementById('proxyFrame').onerror = function() {
+            showError('❌ Failed to load. The website may be blocking proxies or is unreachable.');
+        };
+    </script>
+</body>
+</html>

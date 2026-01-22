@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔓 Ultimate Unblocker Pro - Advanced Edition</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a1e 0%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #ffffff;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            color: #b0b0b0;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #00ff00;
+            padding-bottom: 15px;
+        }
+
+        .tab-button {
+            padding: 12px 25px;
+            background: none;
+            border: none;
+            color: #b0b0b0;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -15px;
+        }
+
+        .tab-button.active {
+            color: #00ff00;
+            border-bottom-color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+        }
+
+        .tab-button:hover {
+            color: #00ff00;
+        }
+
+        .tab-content {
+            display: none;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 0, 0.2);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #00ff00;
+            font-weight: bold;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="file"],
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(0, 255, 0, 0.3);
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group input[type="file"]:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #00ff00;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 200px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            flex: 1;
+            min-width: 150px;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #00ff00, #00cc00);
+            color: #000000;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #00ff00, #00ff00);
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.6);
+            transform: scale(1.05);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #444444, #333333);
+            color: #ffffff;
+            box-shadow: 0 0 20px rgba(100, 100, 100, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #555555, #444444);
+            box-shadow: 0 0 30px rgba(100, 100, 100, 0.6);
+        }
+
+        .iframe-container {
+            margin-top: 30px;
+            display: none;
+        }
+
+        .iframe-container.active {
+            display: block;
+        }
+
+        .iframe-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #00ff00;
+        }
+
+        .iframe-header h3 {
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+        }
+
+        #proxyFrame,
+        #fileFrame {
+            width: 100%;
+            height: 600px;
+            border: 2px solid rgba(0, 255, 0, 0.3);
+            border-radius: 10px;
+            background: #000000;
+            display: none;
+        }
+
+        #proxyFrame.active,
+        #fileFrame.active {
+            display: block;
+        }
+
+        .loading-indicator {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            color: #00ff00;
+            font-weight: bold;
+        }
+
+        .loading-indicator.active {
+            display: block;
+        }
+
+        .loading-indicator::after {
+            content: '';
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin-left: 10px;
+            background: #00ff00;
+            border-radius: 50%;
+            animation: blink 0.6s infinite;
+        }
+
+        @keyframes blink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0.3; }
+        }
+
+        .error-message {
+            display: none;
+            padding: 15px;
+            background: rgba(255, 0, 0, 0.2);
+            border: 2px solid #ff0000;
+            border-radius: 8px;
+            color: #ff6666;
+            margin-bottom: 20px;
+        }
+
+        .error-message.active {
+            display: block;
+        }
+
+        .info-box {
+            background: rgba(0, 255, 0, 0.1);
+            border-left: 4px solid #00ff00;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            color: #b0ffb0;
+        }
+
+        .info-box strong {
+            color: #00ff00;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .tabs {
+                flex-wrap: wrap;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                min-width: 100%;
+            }
+
+            #proxyFrame,
+            #fileFrame {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔓 Ultimate Unblocker</h1>
+            <p>Unblock websites • Load files • Access anywhere</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="switchTab('url')">URL Unblocker</button>
+            <button class="tab-button" onclick="switchTab('file')">File Loader</button>
+            <button class="tab-button" onclick="switchTab('html')">HTML Code</button>
+        </div>
+
+        <!-- URL UNBLOCKER TAB -->
+        <div id="url-tab" class="tab-content active">
+            <div class="info-box">
+                <strong>💡 Tip:</strong> Enter any website URL and we'll unblock it in an iframe below. Try example.com, wikipedia.org, or any other site!
+            </div>
+            <div class="error-message" id="urlError"></div>
+            <div class="form-group">
+                <label for="urlInput">Website URL</label>
+                <input 
+                    type="text" 
+                    id="urlInput" 
+                    placeholder="example.com or https://example.com"
+                    onkeypress="if(event.key==='Enter') unblockUrl()"
+                >
+            </div>
+            <div class="button-group">
+                <button class="btn" onclick="unblockUrl()">🔓 Unblock Website</button>
+                <button class="btn btn-secondary" onclick="closeUrl()">✕ Close</button>
+            </div>
+            <div class="loading-indicator" id="urlLoading"></div>
+            <div class="iframe-container" id="urlContainer">
+                <div class="iframe-header">
+                    <h3>📺 Live Preview</h3>
+                    <button class="btn btn-secondary" style="min-width: 100px;" onclick="closeUrl()">Close</button>
+                </div>
+                <iframe id="proxyFrame"></iframe>
+            </div>
+        </div>
+
+        <!-- FILE LOADER TAB -->
+        <div id="file-tab" class="tab-content">
+            <div class="info-box">
+                <strong>📁 Tip:</strong> Upload an HTML, TXT, or other file from your computer to view it here.
+            </div>
+            <div class="error-message" id="fileError"></div>
+            <div class="form-group">
+                <label for="fileInput">Choose File</label>
+                <input type="file" id="fileInput" onchange="loadFile()" accept=".html,.txt,.md,.xml,.json">
+            </div>
+            <div class="button-group">
+                <button class="btn" onclick="loadFile()">📂 Load File</button>
+                <button class="btn btn-secondary" onclick="closeFile()">✕ Close</button>
+            </div>
+            <div class="loading-indicator" id="fileLoading"></div>
+            <div class="iframe-container" id="fileContainer">
+                <div class="iframe-header">
+                    <h3>📄 File Preview</h3>
+                    <button class="btn btn-secondary" style="min-width: 100px;" onclick="closeFile()">Close</button>
+                </div>
+                <iframe id="fileFrame" sandbox="allow-same-origin allow-scripts"></iframe>
+            </div>
+        </div>
+
+        <!-- HTML CODE TAB -->
+        <div id="html-tab" class="tab-content">
+            <div class="info-box">
+                <strong>💻 Tip:</strong> Paste or write HTML code below and it will display in the preview.
+            </div>
+            <div class="error-message" id="htmlError"></div>
+            <div class="form-group">
+                <label for="htmlCode">HTML Code</label>
+                <textarea 
+                    id="htmlCode" 
+                    placeholder="&lt;!DOCTYPE html&gt;&#10;&lt;html&gt;&#10;&lt;head&gt;&#10;  &lt;title&gt;My Page&lt;/title&gt;&#10;&lt;/head&gt;&#10;&lt;body&gt;&#10;  &lt;h1&gt;Hello World&lt;/h1&gt;&#10;&lt;/body&gt;&#10;&lt;/html&gt;"
+                ></textarea>
+            </div>
+            <div class="button-group">
+                <button class="btn" onclick="renderHtml()">👁️ Preview HTML</button>
+                <button class="btn btn-secondary" onclick="clearHtml()">🗑️ Clear</button>
+            </div>
+            <div class="loading-indicator" id="htmlLoading"></div>
+            <div class="iframe-container" id="htmlContainer">
+                <div class="iframe-header">
+                    <h3>🎨 HTML Preview</h3>
+                    <button class="btn btn-secondary" style="min-width: 100px;" onclick="closeHtml()">Close</button>
+                </div>
+                <iframe id="htmlFrame" sandbox="allow-same-origin allow-scripts"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // TAB SWITCHING
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName + '-tab').classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // URL UNBLOCKER FUNCTIONS
+        function unblockUrl() {
+            let url = document.getElementById('urlInput').value.trim();
+            const errorDiv = document.getElementById('urlError');
+            
+            if (!url) {
+                errorDiv.textContent = '❌ Please enter a URL';
+                errorDiv.classList.add('active');
+                return;
+            }
+
+            if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                url = 'https://' + url;
+            }
+
+            errorDiv.classList.remove('active');
+            showUrlLoading();
+
+            document.getElementById('proxyFrame').onload = () => {
+                hideUrlLoading();
+            };
+
+            document.getElementById('proxyFrame').onerror = () => {
+                hideUrlLoading();
+                errorDiv.textContent = '❌ Failed to load: ' + url + '. This site may not be proxyable.';
+                errorDiv.classList.add('active');
+            };
+
+            document.getElementById('proxyFrame').src = `/proxy?url=${encodeURIComponent(url)}`;
+            document.getElementById('urlContainer').classList.add('active');
+            document.getElementById('proxyFrame').classList.add('active');
+        }
+
+        function closeUrl() {
+            document.getElementById('urlContainer').classList.remove('active');
+            document.getElementById('proxyFrame').classList.remove('active');
+            document.getElementById('proxyFrame').src = '';
+            document.getElementById('urlError').classList.remove('active');
+        }
+
+        function showUrlLoading() {
+            document.getElementById('urlLoading').classList.add('active');
+        }
+
+        function hideUrlLoading() {
+            document.getElementById('urlLoading').classList.remove('active');
+        }
+
+        // FILE LOADER FUNCTIONS
+        function loadFile() {
+            const fileInput = document.getElementById('fileInput');
+            const errorDiv = document.getElementById('fileError');
+
+            if (!fileInput.files.length) {
+                errorDiv.textContent = '❌ Please select a file';
+                errorDiv.classList.add('active');
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                errorDiv.classList.remove('active');
+                showFileLoading();
+
+                const fileFrame = document.getElementById('fileFrame');
+                const content = e.target.result;
+
+                setTimeout(() => {
+                    fileFrame.srcdoc = content;
+                    document.getElementById('fileContainer').classList.add('active');
+                    document.getElementById('fileFrame').classList.add('active');
+                    hideFileLoading();
+                }, 100);
+            };
+
+            reader.onerror = function() {
+                hideFileLoading();
+                errorDiv.textContent = '❌ Error reading file. Try a text-based file.';
+                errorDiv.classList.add('active');
+            };
+
+            reader.readAsText(file);
+        }
+
+        function closeFile() {
+            document.getElementById('fileContainer').classList.remove('active');
+            document.getElementById('fileFrame').classList.remove('active');
+            document.getElementById('fileFrame').srcdoc = '';
+            document.getElementById('fileInput').value = '';
+            document.getElementById('fileError').classList.remove('active');
+        }
+
+        function showFileLoading() {
+            document.getElementById('fileLoading').classList.add('active');
+        }
+
+        function hideFileLoading() {
+            document.getElementById('fileLoading').classList.remove('active');
+        }
+
+        // HTML CODE FUNCTIONS
+        function renderHtml() {
+            const code = document.getElementById('htmlCode').value.trim();
+            const errorDiv = document.getElementById('htmlError');
+
+            if (!code) {
+                errorDiv.textContent = '❌ Please enter HTML code';
+                errorDiv.classList.add('active');
+                return;
+            }
+
+            errorDiv.classList.remove('active');
+            showHtmlLoading();
+
+            const htmlFrame = document.getElementById('htmlFrame');
+            setTimeout(() => {
+                try {
+                    htmlFrame.srcdoc = code;
+                    document.getElementById('htmlContainer').classList.add('active');
+                    document.getElementById('htmlFrame').classList.add('active');
+                    hideHtmlLoading();
+                } catch (err) {
+                    hideHtmlLoading();
+                    errorDiv.textContent = '❌ Error: ' + err.message;
+                    errorDiv.classList.add('active');
+                }
+            }, 100);
+        }
+
+        function closeHtml() {
+            document.getElementById('htmlContainer').classList.remove('active');
+            document.getElementById('htmlFrame').classList.remove('active');
+            document.getElementById('htmlFrame').srcdoc = '';
+            document.getElementById('htmlError').classList.remove('active');
+        }
+
+        function clearHtml() {
+            document.getElementById('htmlCode').value = '';
+            closeHtml();
+        }
+
+        function showHtmlLoading() {
+            document.getElementById('htmlLoading').classList.add('active');
+        }
+
+        function hideHtmlLoading() {
+            document.getElementById('htmlLoading').classList.remove('active');
+        }
+    </script>
+</body>
+</html>
