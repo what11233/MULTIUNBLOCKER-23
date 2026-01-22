@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔓 Web Unblocker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            color: #00ff00;
+            text-shadow: 0 0 20px #00ff00;
+            margin-bottom: 10px;
+        }
+
+        header a {
+            color: #00ff00;
+            text-decoration: none;
+            font-size: 0.9em;
+            margin-top: 15px;
+            display: inline-block;
+        }
+
+        header a:hover {
+            text-decoration: underline;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid #00ff00;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            color: #00ff00;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px #00ff00;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #00ff00;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(0, 255, 0, 0.3);
+            border-radius: 8px;
+            color: #e0e0e0;
+            font-family: inherit;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #00ff00;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #00ff00, #00cc00);
+            color: #000000;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+
+        button:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.6);
+            transform: scale(1.05);
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #444444, #333333);
+            color: #e0e0e0;
+            box-shadow: 0 0 15px rgba(100, 100, 100, 0.3);
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 0 25px rgba(100, 100, 100, 0.6);
+        }
+
+        .message {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .success {
+            background: rgba(0, 255, 0, 0.15);
+            border: 2px solid #00ff00;
+            color: #88ff88;
+        }
+
+        .error {
+            background: rgba(255, 0, 0, 0.15);
+            border: 2px solid #ff0000;
+            color: #ff8888;
+        }
+
+        .message.show {
+            display: block;
+        }
+
+        .iframe-container {
+            background: #000000;
+            border: 2px solid rgba(0, 255, 0, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .iframe-container.show {
+            display: block;
+        }
+
+        .iframe-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid rgba(0, 255, 0, 0.3);
+        }
+
+        .iframe-header h3 {
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+            margin: 0;
+        }
+
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            background: #000000;
+        }
+
+        .loading {
+            text-align: center;
+            color: #00ff00;
+            padding: 20px;
+            display: none;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 255, 0, 0.2);
+            border-top: 4px solid #00ff00;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .info {
+            background: rgba(0, 255, 0, 0.1);
+            border-left: 4px solid #00ff00;
+            padding: 15px;
+            border-radius: 5px;
+            color: #b0ffb0;
+            margin-bottom: 20px;
+        }
+
+        .info strong {
+            color: #00ff00;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            iframe {
+                height: 400px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌐 Web Unblocker</h1>
+            <a href="../index.html">← Back to Home</a>
+        </header>
+
+        <div class="card">
+            <h2>Unblock Any Website</h2>
+            <div class="info">
+                <strong>💡 How it works:</strong> Enter any website URL below and we'll load it for you through our proxy system. Most websites work perfectly!
+            </div>
+
+            <div id="message" class="message"></div>
+
+            <div class="form-group">
+                <label for="urlInput">Website URL</label>
+                <input 
+                    type="text" 
+                    id="urlInput" 
+                    placeholder="example.com or https://example.com"
+                    onkeypress="if(event.key==='Enter') unblockSite()"
+                >
+            </div>
+
+            <div class="button-group">
+                <button onclick="unblockSite()">🚀 Unblock Website</button>
+                <button class="btn-secondary" onclick="clearForm()">🗑️ Clear</button>
+            </div>
+        </div>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Loading website...</p>
+        </div>
+
+        <div class="iframe-container" id="iframeContainer">
+            <div class="iframe-header">
+                <h3>📺 Website Preview</h3>
+                <button class="btn-secondary" onclick="closeFrame()">✕ Close</button>
+            </div>
+            <iframe id="proxyFrame"></iframe>
+        </div>
+    </div>
+
+    <script>
+        function showMessage(text, type) {
+            const msg = document.getElementById('message');
+            msg.textContent = text;
+            msg.className = 'message show ' + type;
+            setTimeout(() => msg.classList.remove('show'), 5000);
+        }
+
+        function unblockSite() {
+            let url = document.getElementById('urlInput').value.trim();
+
+            if (!url) {
+                showMessage('❌ Please enter a URL', 'error');
+                return;
+            }
+
+            if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                url = 'https://' + url;
+            }
+
+            document.getElementById('loading').classList.add('show');
+            document.getElementById('iframeContainer').classList.add('show');
+
+            const iframe = document.getElementById('proxyFrame');
+            iframe.src = `/proxy?url=${encodeURIComponent(url)}`;
+
+            iframe.onload = () => {
+                document.getElementById('loading').classList.remove('show');
+                showMessage('✅ Website loaded successfully!', 'success');
+            };
+
+            iframe.onerror = () => {
+                document.getElementById('loading').classList.remove('show');
+                showMessage('❌ Failed to load website', 'error');
+            };
+        }
+
+        function closeFrame() {
+            document.getElementById('iframeContainer').classList.remove('show');
+            document.getElementById('proxyFrame').src = '';
+        }
+
+        function clearForm() {
+            document.getElementById('urlInput').value = '';
+            closeFrame();
+        }
+    </script>
+</body>
+</html>

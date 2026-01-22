@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛠️ Tools Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            color: #00ff00;
+            text-shadow: 0 0 20px #00ff00;
+            margin-bottom: 10px;
+        }
+
+        header a {
+            color: #00ff00;
+            text-decoration: none;
+            font-size: 0.9em;
+            margin-top: 15px;
+            display: inline-block;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            border-bottom: 2px solid rgba(0, 255, 0, 0.2);
+            padding-bottom: 15px;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            background: rgba(0, 255, 0, 0.05);
+            border: 2px solid transparent;
+            border-radius: 6px;
+            color: #b0b0b0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn:hover {
+            border-color: #00ff00;
+            color: #00ff00;
+        }
+
+        .tab-btn.active {
+            background: rgba(0, 255, 0, 0.2);
+            border-color: #00ff00;
+            color: #00ff00;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid #00ff00;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        textarea, input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(0, 255, 0, 0.3);
+            border-radius: 8px;
+            color: #e0e0e0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+        }
+
+        textarea:focus, input:focus {
+            outline: none;
+            border-color: #00ff00;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        button {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #00ff00, #00cc00);
+            color: #000000;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.6);
+            transform: scale(1.05);
+        }
+
+        .output-box {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #00ff00;
+            min-height: 100px;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-break: break-word;
+            margin-top: 15px;
+        }
+
+        label {
+            display: block;
+            margin: 15px 0 8px 0;
+            color: #00ff00;
+            font-weight: bold;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9em;
+        }
+
+        .counter {
+            text-align: right;
+            font-size: 0.9em;
+            color: #808080;
+            margin-top: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .tabs {
+                flex-direction: column;
+            }
+
+            .tab-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛠️ Tools Hub</h1>
+            <a href="../index.html">← Back to Home</a>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('text')">📝 Text Tools</button>
+            <button class="tab-btn" onclick="switchTab('generator')">⚡ Generators</button>
+            <button class="tab-btn" onclick="switchTab('converter')">🔄 Converters</button>
+        </div>
+
+        <!-- TEXT TOOLS TAB -->
+        <div id="text" class="tab-content active">
+            <div class="grid-2">
+                <div class="card">
+                    <h2>📝 Text Input</h2>
+                    <textarea id="textInput" placeholder="Enter text here..."></textarea>
+                    <div class="counter">
+                        <span id="charCount">0</span> characters | <span id="wordCount">0</span> words
+                    </div>
+                </div>
+                <div class="card">
+                    <h2>📊 Output</h2>
+                    <div class="output-box" id="textOutput">Result will appear here...</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>⚙️ Text Operations</h2>
+                <div class="button-group">
+                    <button class="btn-small" onclick="textUpper()">UPPERCASE</button>
+                    <button class="btn-small" onclick="textLower()">lowercase</button>
+                    <button class="btn-small" onclick="textReverse()">Reverse</button>
+                    <button class="btn-small" onclick="textTrim()">Remove Spaces</button>
+                    <button class="btn-small" onclick="textBase64Encode()">Base64 Encode</button>
+                    <button class="btn-small" onclick="textBase64Decode()">Base64 Decode</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- GENERATORS TAB -->
+        <div id="generator" class="tab-content">
+            <div class="grid-2">
+                <div class="card">
+                    <h2>🔐 Password Generator</h2>
+                    <label>Length</label>
+                    <input type="number" id="passLength" value="16" min="8" max="128">
+                    <button onclick="generatePassword()">Generate</button>
+                    <div class="output-box" id="passOutput">Click Generate...</div>
+                </div>
+
+                <div class="card">
+                    <h2>🆔 UUID Generator</h2>
+                    <button onclick="generateUUID()">Generate UUID</button>
+                    <div class="output-box" id="uuidOutput">Click Generate...</div>
+                </div>
+
+                <div class="card">
+                    <h2>🎨 Random Color</h2>
+                    <button onclick="generateColor()">Generate Color</button>
+                    <div class="output-box" id="colorOutput">#000000</div>
+                    <div style="height: 60px; background: #000000; border-radius: 8px; margin-top: 15px; border: 2px solid rgba(0, 255, 0, 0.3);" id="colorPreview"></div>
+                </div>
+
+                <div class="card">
+                    <h2>🎲 Random Number</h2>
+                    <label>Min</label>
+                    <input type="number" id="minNum" value="1">
+                    <label>Max</label>
+                    <input type="number" id="maxNum" value="100">
+                    <button onclick="generateRandom()">Generate</button>
+                    <div class="output-box" id="randomOutput">0</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONVERTERS TAB -->
+        <div id="converter" class="tab-content">
+            <div class="grid-2">
+                <div class="card">
+                    <h2>🔄 Decimal ↔ Hex</h2>
+                    <label>Decimal</label>
+                    <input type="text" id="decimal" placeholder="255">
+                    <button onclick="decToHex()">To Hex</button>
+                    <div class="output-box" id="hexOutput">#000000</div>
+                </div>
+
+                <div class="card">
+                    <h2>🔄 Hex ↔ Decimal</h2>
+                    <label>Hex</label>
+                    <input type="text" id="hex" placeholder="#FF0000">
+                    <button onclick="hexToDec()">To Decimal</button>
+                    <div class="output-box" id="decOutput">0</div>
+                </div>
+
+                <div class="card">
+                    <h2>🔄 JSON Formatter</h2>
+                    <textarea id="jsonInput" placeholder='{"key":"value"}'></textarea>
+                    <button onclick="formatJSON()">Format</button>
+                    <div class="output-box" id="jsonOutput">Formatted JSON...</div>
+                </div>
+
+                <div class="card">
+                    <h2>🔄 URL Encode/Decode</h2>
+                    <input type="text" id="urlEncode" placeholder="Enter text or URL">
+                    <button onclick="encodeURL()">Encode</button>
+                    <button onclick="decodeURL()">Decode</button>
+                    <div class="output-box" id="urlOutput">Result...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('textInput')?.addEventListener('input', updateCount);
+
+        function updateCount() {
+            const text = document.getElementById('textInput').value;
+            document.getElementById('charCount').textContent = text.length;
+            document.getElementById('wordCount').textContent = text.trim().split(/\s+/).filter(w => w).length;
+        }
+
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(tab).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // TEXT TOOLS
+        function textUpper() { document.getElementById('textOutput').textContent = document.getElementById('textInput').value.toUpperCase(); }
+        function textLower() { document.getElementById('textOutput').textContent = document.getElementById('textInput').value.toLowerCase(); }
+        function textReverse() { document.getElementById('textOutput').textContent = document.getElementById('textInput').value.split('').reverse().join(''); }
+        function textTrim() { document.getElementById('textOutput').textContent = document.getElementById('textInput').value.replace(/\s+/g, ''); }
+        function textBase64Encode() { document.getElementById('textOutput').textContent = btoa(document.getElementById('textInput').value); }
+        function textBase64Decode() { try { document.getElementById('textOutput').textContent = atob(document.getElementById('textInput').value); } catch(e) { document.getElementById('textOutput').textContent = 'Invalid Base64'; } }
+
+        // GENERATORS
+        function generatePassword() {
+            const len = parseInt(document.getElementById('passLength').value);
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
+            let pass = '';
+            for (let i = 0; i < len; i++) pass += chars.charAt(Math.floor(Math.random() * chars.length));
+            document.getElementById('passOutput').textContent = pass;
+        }
+
+        function generateUUID() {
+            const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+                const r = Math.random() * 16 | 0;
+                return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+            });
+            document.getElementById('uuidOutput').textContent = uuid;
+        }
+
+        function generateColor() {
+            const color = '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0').toUpperCase();
+            document.getElementById('colorOutput').textContent = color;
+            document.getElementById('colorPreview').style.backgroundColor = color;
+        }
+
+        function generateRandom() {
+            const min = parseInt(document.getElementById('minNum').value);
+            const max = parseInt(document.getElementById('maxNum').value);
+            const random = Math.floor(Math.random() * (max - min + 1)) + min;
+            document.getElementById('randomOutput').textContent = random;
+        }
+
+        // CONVERTERS
+        function decToHex() {
+            const dec = parseInt(document.getElementById('decimal').value);
+            document.getElementById('hexOutput').textContent = '#' + dec.toString(16).toUpperCase().padStart(6, '0');
+        }
+
+        function hexToDec() {
+            const hex = document.getElementById('hex').value.replace('#', '');
+            document.getElementById('decOutput').textContent = parseInt(hex, 16);
+        }
+
+        function formatJSON() {
+            try {
+                const json = JSON.parse(document.getElementById('jsonInput').value);
+                document.getElementById('jsonOutput').textContent = JSON.stringify(json, null, 2);
+            } catch(e) {
+                document.getElementById('jsonOutput').textContent = 'Invalid JSON: ' + e.message;
+            }
+        }
+
+        function encodeURL() {
+            document.getElementById('urlOutput').textContent = encodeURIComponent(document.getElementById('urlEncode').value);
+        }
+
+        function decodeURL() {
+            try {
+                document.getElementById('urlOutput').textContent = decodeURIComponent(document.getElementById('urlEncode').value);
+            } catch(e) {
+                document.getElementById('urlOutput').textContent = 'Invalid URL';
+            }
+        }
+    </script>
+</body>
+</html>

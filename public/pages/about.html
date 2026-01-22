@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ℹ️ About & Help</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            color: #00ff00;
+            text-shadow: 0 0 20px #00ff00;
+            margin-bottom: 10px;
+        }
+
+        header a {
+            color: #00ff00;
+            text-decoration: none;
+            font-size: 0.9em;
+            margin-top: 15px;
+            display: inline-block;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid #00ff00;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            color: #00ff00;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px #00ff00;
+        }
+
+        .card h3 {
+            color: #00ff00;
+            font-size: 1.2em;
+            margin: 20px 0 10px 0;
+            margin-top: 20px;
+        }
+
+        .card p, .card li {
+            color: #b0b0b0;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        .card ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .card li {
+            margin-bottom: 8px;
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .feature-item {
+            background: rgba(0, 255, 0, 0.05);
+            padding: 15px;
+            border-left: 3px solid #00ff00;
+            border-radius: 5px;
+        }
+
+        .feature-item strong {
+            color: #00ff00;
+        }
+
+        .highlight {
+            background: rgba(0, 255, 0, 0.1);
+            padding: 20px;
+            border-left: 4px solid #00ff00;
+            border-radius: 5px;
+            color: #b0ffb0;
+            margin: 20px 0;
+        }
+
+        .highlight strong {
+            color: #00ff00;
+        }
+
+        @media (max-width: 768px) {
+            .feature-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ℹ️ About & Help</h1>
+            <a href="../index.html">← Back to Home</a>
+        </header>
+
+        <div class="card">
+            <h2>Welcome to Ultimate Unblocker PRO</h2>
+            <div class="highlight">
+                <strong>🎉 Version 3.0</strong><br>
+                A complete web tool suite with web unblocker, code editor, text tools, generators, security tools, and more!
+            </div>
+
+            <h3>🌟 Features</h3>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <strong>🌐 Web Unblocker</strong><br>
+                    Access any website through our proxy system. Perfect for accessing blocked content.
+                </div>
+                <div class="feature-item">
+                    <strong>💻 Code Editor</strong><br>
+                    Write HTML/CSS/JavaScript and see live preview. Great for learning web development.
+                </div>
+                <div class="feature-item">
+                    <strong>📝 Text Tools</strong><br>
+                    Convert text case, reverse, count characters, Base64 encode/decode, and more.
+                </div>
+                <div class="feature-item">
+                    <strong>⚡ Generators</strong><br>
+                    Generate passwords, UUIDs, random colors, and random numbers instantly.
+                </div>
+                <div class="feature-item">
+                    <strong>🔄 Converters</strong><br>
+                    Convert between formats: Decimal/Hex, JSON formatting, URL encoding, and more.
+                </div>
+                <div class="feature-item">
+                    <strong>🔒 Security Tools</strong><br>
+                    Hash text with SHA256, Base64 encode/decode, URL encode/decode.
+                </div>
+                <div class="feature-item">
+                    <strong>📁 File Loader</strong><br>
+                    Load and preview HTML, TXT, and other text files directly in your browser.
+                </div>
+                <div class="feature-item">
+                    <strong>⚙️ Always Working</strong><br>
+                    All tools are 100% functional and ready to use right now.
+                </div>
+            </div>
+
+            <h3>📖 How to Use</h3>
+            <ul>
+                <li><strong>Web Unblocker:</strong> Enter a website URL and click "Unblock Website"</li>
+                <li><strong>Code Editor:</strong> Write HTML/CSS/JS code and click "Render" to preview</li>
+                <li><strong>Text Tools:</strong> Paste text, select an operation, and see results instantly</li>
+                <li><strong>Generators:</strong> Click buttons to generate passwords, colors, UUIDs, numbers</li>
+                <li><strong>Converters:</strong> Enter data and select conversion type</li>
+                <li><strong>Security Tools:</strong> Hash text, encode/decode Base64, and URL encode</li>
+                <li><strong>File Loader:</strong> Select a file and it displays in the preview area</li>
+            </ul>
+
+            <h3>🔧 Technology Stack</h3>
+            <ul>
+                <li><strong>Backend:</strong> Node.js + Express.js for the proxy server</li>
+                <li><strong>Frontend:</strong> Pure HTML5, CSS3, and Vanilla JavaScript</li>
+                <li><strong>Libraries:</strong> Axios for HTTP requests, CORS for cross-origin support</li>
+                <li><strong>Security:</strong> Web Crypto API for SHA256 hashing</li>
+            </ul>
+
+            <h3>❓ FAQ</h3>
+            <p><strong>Q: Will this work on my Chromebook?</strong><br>
+            A: Yes! If you're using GitHub Codespaces, it works perfectly. You can also run it locally on any Linux/Mac/Windows computer.</p>
+
+            <p><strong>Q: Can I use this offline?</strong><br>
+            A: The unblocker needs internet to fetch websites. Other tools like text conversion, code editor, and generators work offline.</p>
+
+            <p><strong>Q: What sites work with the unblocker?</strong><br>
+            A: Most websites work great! Some sites with advanced security (YouTube, Facebook, Discord) may not work due to their security protocols.</p>
+
+            <p><strong>Q: Is my data safe?</strong><br>
+            A: All data stays on your device. The proxy server doesn't log or store any information.</p>
+
+            <p><strong>Q: Can I deploy this online?</strong><br>
+            A: Yes! You can deploy to Render, Heroku, or any Node.js hosting service.</p>
+
+            <h3>🚀 Getting Started</h3>
+            <ol>
+                <li>Visit the home page and select a tool</li>
+                <li>Follow the instructions on each page</li>
+                <li>Results appear instantly</li>
+                <li>Copy results to clipboard if needed</li>
+            </ol>
+
+            <h3>💡 Tips & Tricks</h3>
+            <ul>
+                <li>Use the Web Unblocker with <code>example.com</code> to test first</li>
+                <li>Generators are useful for creating test data</li>
+                <li>Code Editor supports all HTML5, CSS3, and JavaScript features</li>
+                <li>Text tools batch convert multiple operations easily</li>
+                <li>Security tools are fast and use standard algorithms</li>
+            </ul>
+
+            <h3>📞 Support</h3>
+            <p>If you encounter any issues or have questions:</p>
+            <ul>
+                <li>Check that the server is running on port 3000</li>
+                <li>Try refreshing the page</li>
+                <li>Clear browser cache if tools don't work</li>
+                <li>Check the browser console (F12) for error messages</li>
+            </ul>
+
+            <h3>📄 Version Info</h3>
+            <p>
+                <strong>Ultimate Unblocker PRO v3.0</strong><br>
+                Release: 2026<br>
+                Status: ✅ Fully Functional<br>
+                All features tested and working
+            </p>
+        </div>
+    </div>
+</body>
+</html>

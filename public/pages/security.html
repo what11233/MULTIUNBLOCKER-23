@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔒 Security Tools</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            color: #00ff00;
+            text-shadow: 0 0 20px #00ff00;
+            margin-bottom: 10px;
+        }
+
+        header a {
+            color: #00ff00;
+            text-decoration: none;
+            font-size: 0.9em;
+            margin-top: 15px;
+            display: inline-block;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid #00ff00;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            color: #00ff00;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px #00ff00;
+        }
+
+        textarea, input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(0, 255, 0, 0.3);
+            border-radius: 8px;
+            color: #e0e0e0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        textarea:focus, input:focus {
+            outline: none;
+            border-color: #00ff00;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+        }
+
+        button {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #00ff00, #00cc00);
+            color: #000000;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.6);
+            transform: scale(1.05);
+        }
+
+        .output-box {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #00ff00;
+            min-height: 100px;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-break: break-word;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔒 Security Tools</h1>
+            <a href="../index.html">← Back to Home</a>
+        </header>
+
+        <div class="grid-2">
+            <div class="card">
+                <h2>🔐 SHA256 Hash</h2>
+                <textarea id="hashInput" placeholder="Enter text to hash..."></textarea>
+                <button onclick="generateSHA256()">Hash</button>
+                <div class="output-box" id="hashOutput">Hash will appear here...</div>
+            </div>
+
+            <div class="card">
+                <h2>🔐 Base64 Encoder</h2>
+                <textarea id="base64EncInput" placeholder="Enter text..."></textarea>
+                <button onclick="encodeBase64()">Encode</button>
+                <div class="output-box" id="base64EncOutput">Encoded text here...</div>
+            </div>
+
+            <div class="card">
+                <h2>🔑 Base64 Decoder</h2>
+                <textarea id="base64DecInput" placeholder="Enter base64 text..."></textarea>
+                <button onclick="decodeBase64()">Decode</button>
+                <div class="output-box" id="base64DecOutput">Decoded text here...</div>
+            </div>
+
+            <div class="card">
+                <h2>🛡️ URL Encoder</h2>
+                <input type="text" id="urlInput" placeholder="Enter URL...">
+                <button onclick="encodeUrlText()">Encode</button>
+                <button onclick="decodeUrlText()">Decode</button>
+                <div class="output-box" id="urlOutput">Result here...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function generateSHA256() {
+            const text = document.getElementById('hashInput').value;
+            if (!text) {
+                alert('Please enter text');
+                return;
+            }
+            
+            const encoded = new TextEncoder().encode(text);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', encoded);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            document.getElementById('hashOutput').textContent = hashHex;
+        }
+
+        function encodeBase64() {
+            const text = document.getElementById('base64EncInput').value;
+            try {
+                document.getElementById('base64EncOutput').textContent = btoa(text);
+            } catch (e) {
+                document.getElementById('base64EncOutput').textContent = 'Error: ' + e.message;
+            }
+        }
+
+        function decodeBase64() {
+            const text = document.getElementById('base64DecInput').value;
+            try {
+                document.getElementById('base64DecOutput').textContent = atob(text);
+            } catch (e) {
+                document.getElementById('base64DecOutput').textContent = 'Error: Invalid Base64';
+            }
+        }
+
+        function encodeUrlText() {
+            const text = document.getElementById('urlInput').value;
+            document.getElementById('urlOutput').textContent = encodeURIComponent(text);
+        }
+
+        function decodeUrlText() {
+            const text = document.getElementById('urlInput').value;
+            try {
+                document.getElementById('urlOutput').textContent = decodeURIComponent(text);
+            } catch (e) {
+                document.getElementById('urlOutput').textContent = 'Error: ' + e.message;
+            }
+        }
+    </script>
+</body>
+</html>

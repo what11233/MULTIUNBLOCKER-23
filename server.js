@@ -1,91 +1,85 @@
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
-const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// MIDDLEWARE (Setup)
-app.use(cors()); // Allow requests from different sources
-app.use(express.json()); // Parse JSON data
-app.use(express.static('public')); // Serve files from the 'public' folder
+// Middleware
+app.use(cors());
+app.use(express.json());
+app.use(express.static('public'));
 
-// FUNCTION: Rewrite URLs inside HTML so they stay in the proxy
-// Example: <a href="/about"> becomes <a href="/proxy?url=https://site.com/about">
+// Rewrite URLs to stay in proxy
 function rewriteUrls(html, targetUrl, proxyBase) {
+    if (typeof html !== 'string') return html;
+    
     return html.replace(/(href|src)=["']([^"']*)["']/g, (match, attr, value) => {
-        // Don't rewrite data URIs or fragments
-        if (value.startsWith('data:') || value.startsWith('#')) return match;
-        
+        if (value.startsWith('data:') || value.startsWith('#') || value.startsWith('javascript:')) {
+            return match;
+        }
         try {
-            // Convert relative URLs to absolute URLs
             const absoluteUrl = new URL(value, targetUrl).toString();
-            // Rewrite to point back through proxy
             return `${attr}="${proxyBase}?url=${encodeURIComponent(absoluteUrl)}"`;
         } catch (e) {
-            // If URL parsing fails, keep the original
             return match;
         }
     });
 }
 
-// ENDPOINT: /proxy - The main proxy handler
-// This fetches websites and serves them through an iframe
+// Main proxy endpoint
 app.get('/proxy', async (req, res) => {
     const targetUrl = req.query.url;
     
-    // Check if user provided a URL
     if (!targetUrl) {
-        return res.status(400).send('❌ No URL provided');
+        return res.status(400).json({ error: 'No URL provided' });
     }
 
     try {
-        // Step 1: Fetch the target website
         const response = await axios.get(targetUrl, {
             headers: {
-                // Pretend to be a normal browser so sites don't block us
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
             },
-            responseType: 'text' // Get response as text so we can modify it
+            timeout: 10000,
+            maxRedirects: 5
         });
 
-        // Step 2: Strip security headers that prevent iframe loading
-        res.set('Content-Security-Policy', "default-src * 'unsafe-inline' 'unsafe-eval'");
-        res.removeHeader('X-Frame-Options'); // This is the KEY - it stops the "You can't iframe me" block
-        
-        const contentType = response.headers['content-type'] || 'text/html';
-        
-        // Step 3: If it's HTML, rewrite the URLs
+        const contentType = response.headers['content-type'] || '';
+        const proxyBase = `/proxy`;
+
+        // If it's HTML, rewrite URLs
         if (contentType.includes('text/html')) {
-            const proxyBase = `${req.protocol}://${req.get('host')}/proxy`;
-            const rewrittenHtml = rewriteUrls(response.data, targetUrl, proxyBase);
-            res.set('Content-Type', 'text/html');
-            return res.send(rewrittenHtml);
+            let html = response.data;
+            html = rewriteUrls(html, targetUrl, proxyBase);
+            
+            // Remove security headers that block iframes
+            res.removeHeader('X-Frame-Options');
+            res.set('Content-Security-Policy', "default-src * 'unsafe-inline' 'unsafe-eval'");
+            res.set('Content-Type', 'text/html; charset=utf-8');
+            
+            return res.send(html);
         }
 
-        // Step 4: For images, CSS, JS, just send them through as-is
+        // For other content types, just pass through
         res.set('Content-Type', contentType);
         res.send(response.data);
 
     } catch (error) {
-        // If something goes wrong, send a friendly error message
-        res.status(500).send(`
-            <h1 style="color: red;">❌ Error Loading Page</h1>
-            <p>${error.message}</p>
-            <p>The website may be:</p>
-            <ul>
-                <li>Down or unreachable</li>
-                <li>Blocking proxy servers</li>
-                <li>Using very strict security settings</li>
-            </ul>
-        `);
+        console.error('Proxy error:', error.message);
+        res.status(500).json({ 
+            error: 'Failed to load website',
+            details: error.message 
+        });
     }
 });
 
-// START: Listen for incoming requests
+// Health check
+app.get('/health', (req, res) => {
+    res.json({ status: 'ok' });
+});
+
 app.listen(PORT, () => {
-    console.log('🚀 Proxy Server is RUNNING');
-    console.log(`📍 Open your browser to: http://localhost:${PORT}`);
-    console.log(`\n💡 Press Ctrl+C to stop the server`);
+    console.log('🚀 Unblocker Server RUNNING');
+    console.log(`📍 Visit: http://localhost:${PORT}`);
+    console.log(`🛠️  Proxy endpoint: http://localhost:${PORT}/proxy?url=ENCODED_URL`);
 });

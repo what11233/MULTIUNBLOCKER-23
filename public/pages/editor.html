@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💻 Code Editor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            color: #00ff00;
+            text-shadow: 0 0 20px #00ff00;
+            margin-bottom: 10px;
+        }
+
+        header a {
+            color: #00ff00;
+            text-decoration: none;
+            font-size: 0.9em;
+            margin-top: 15px;
+            display: inline-block;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid #00ff00;
+            border-radius: 12px;
+            padding: 25px;
+        }
+
+        .card h2 {
+            color: #00ff00;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px #00ff00;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(0, 255, 0, 0.3);
+            border-radius: 8px;
+            color: #e0e0e0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            min-height: 300px;
+            resize: vertical;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #00ff00;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+        }
+
+        button {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #00ff00, #00cc00);
+            color: #000000;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.6);
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #444444, #333333);
+            color: #e0e0e0;
+            box-shadow: 0 0 15px rgba(100, 100, 100, 0.3);
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 0 25px rgba(100, 100, 100, 0.6);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .iframe-container {
+            background: #000000;
+            border: 2px solid #00ff00;
+            border-radius: 10px;
+            padding: 0;
+            overflow: hidden;
+            display: none;
+        }
+
+        .iframe-container.show {
+            display: block;
+        }
+
+        .iframe-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid rgba(0, 255, 0, 0.3);
+        }
+
+        .iframe-header h3 {
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+            margin: 0;
+        }
+
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            background: #000000;
+        }
+
+        @media (max-width: 968px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            iframe {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💻 Code Editor</h1>
+            <a href="../index.html">← Back to Home</a>
+        </header>
+
+        <div class="grid-2">
+            <div class="card">
+                <h2>💻 Write Code</h2>
+                <textarea id="codeInput" placeholder="&lt;!DOCTYPE html&gt;&#10;&lt;html&gt;&#10;&lt;body&gt;&#10;&lt;h1&gt;Hello World&lt;/h1&gt;&#10;&lt;/body&gt;&#10;&lt;/html&gt;"></textarea>
+            </div>
+            <div class="card">
+                <h2>👁️ Preview</h2>
+                <div class="button-group">
+                    <button onclick="renderCode()">🔄 Render</button>
+                    <button class="btn-secondary" onclick="clearCode()">Clear</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="iframe-container" id="previewContainer">
+            <div class="iframe-header">
+                <h3>🎨 Live Preview</h3>
+                <button class="btn-secondary" onclick="closePreview()">Close</button>
+            </div>
+            <iframe id="previewFrame" sandbox="allow-same-origin allow-scripts"></iframe>
+        </div>
+    </div>
+
+    <script>
+        function renderCode() {
+            const code = document.getElementById('codeInput').value;
+            if (!code.trim()) {
+                alert('Please enter HTML code');
+                return;
+            }
+            document.getElementById('previewFrame').srcdoc = code;
+            document.getElementById('previewContainer').classList.add('show');
+        }
+
+        function clearCode() {
+            document.getElementById('codeInput').value = '';
+            document.getElementById('previewFrame').srcdoc = '';
+            document.getElementById('previewContainer').classList.remove('show');
+        }
+
+        function closePreview() {
+            document.getElementById('previewContainer').classList.remove('show');
+        }
+    </script>
+</body>
+</html>

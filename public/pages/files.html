@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📁 File Loader</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            color: #00ff00;
+            text-shadow: 0 0 20px #00ff00;
+            margin-bottom: 10px;
+        }
+
+        header a {
+            color: #00ff00;
+            text-decoration: none;
+            font-size: 0.9em;
+            margin-top: 15px;
+            display: inline-block;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid #00ff00;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            color: #00ff00;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px #00ff00;
+        }
+
+        .info {
+            background: rgba(0, 255, 0, 0.1);
+            border-left: 4px solid #00ff00;
+            padding: 15px;
+            border-radius: 5px;
+            color: #b0ffb0;
+            margin-bottom: 20px;
+        }
+
+        .info strong {
+            color: #00ff00;
+        }
+
+        input[type="file"] {
+            display: block;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px dashed rgba(0, 255, 0, 0.3);
+            border-radius: 8px;
+            color: #e0e0e0;
+            width: 100%;
+        }
+
+        input[type="file"]::-webkit-file-upload-button {
+            background: linear-gradient(135deg, #00ff00, #00cc00);
+            color: #000000;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #00ff00, #00cc00);
+            color: #000000;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.6);
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #444444, #333333);
+            color: #e0e0e0;
+            box-shadow: 0 0 15px rgba(100, 100, 100, 0.3);
+        }
+
+        .iframe-container {
+            background: #000000;
+            border: 2px solid #00ff00;
+            border-radius: 10px;
+            padding: 0;
+            overflow: hidden;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .iframe-container.show {
+            display: block;
+        }
+
+        .iframe-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid rgba(0, 255, 0, 0.3);
+        }
+
+        .iframe-header h3 {
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+            margin: 0;
+        }
+
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            background: #000000;
+        }
+
+        .message {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .success {
+            background: rgba(0, 255, 0, 0.15);
+            border: 2px solid #00ff00;
+            color: #88ff88;
+        }
+
+        .error {
+            background: rgba(255, 0, 0, 0.15);
+            border: 2px solid #ff0000;
+            color: #ff8888;
+        }
+
+        .message.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            iframe {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📁 File Loader</h1>
+            <a href="../index.html">← Back to Home</a>
+        </header>
+
+        <div class="card">
+            <h2>Load Files</h2>
+            <div class="info">
+                <strong>📂 Supported:</strong> HTML, TXT, MD, CSS, JavaScript, JSON, XML and more
+            </div>
+
+            <div id="message" class="message"></div>
+
+            <input type="file" id="fileInput" accept=".html,.txt,.md,.css,.js,.json,.xml">
+            <button onclick="loadFile()">📂 Load File</button>
+            <button class="btn-secondary" onclick="closeFile()">Close Preview</button>
+        </div>
+
+        <div class="iframe-container" id="fileContainer">
+            <div class="iframe-header">
+                <h3>📄 File Preview</h3>
+                <button class="btn-secondary" onclick="closeFile()">Close</button>
+            </div>
+            <iframe id="fileFrame" sandbox="allow-same-origin allow-scripts"></iframe>
+        </div>
+    </div>
+
+    <script>
+        function loadFile() {
+            const fileInput = document.getElementById('fileInput');
+            const msg = document.getElementById('message');
+
+            if (!fileInput.files.length) {
+                msg.textContent = '❌ Please select a file';
+                msg.className = 'message show error';
+                setTimeout(() => msg.classList.remove('show'), 3000);
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                const content = e.target.result;
+                document.getElementById('fileFrame').srcdoc = content;
+                document.getElementById('fileContainer').classList.add('show');
+                msg.textContent = '✅ File loaded successfully!';
+                msg.className = 'message show success';
+                setTimeout(() => msg.classList.remove('show'), 3000);
+            };
+
+            reader.onerror = function() {
+                msg.textContent = '❌ Error reading file';
+                msg.className = 'message show error';
+                setTimeout(() => msg.classList.remove('show'), 3000);
+            };
+
+            reader.readAsText(file);
+        }
+
+        function closeFile() {
+            document.getElementById('fileContainer').classList.remove('show');
+            document.getElementById('fileFrame').srcdoc = '';
+            document.getElementById('fileInput').value = '';
+        }
+    </script>
+</body>
+</html>

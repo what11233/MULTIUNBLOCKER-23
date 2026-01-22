@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔓 Such Unblocker WOW - All-in-One</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 25%, #FF69B4 50%, #87CEEB 75%, #98FB98 100%);
+            min-height: 100vh;
+            color: #333;
+            padding: 20px;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { filter: hue-rotate(0deg); }
+            50% { filter: hue-rotate(20deg); }
+        }
+
+        .doge-header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .doge-title {
+            font-size: 4em;
+            font-weight: bold;
+            text-shadow: 3px 3px 0px rgba(0,0,0,0.3), 6px 6px 0px rgba(255,0,0,0.3);
+            margin-bottom: 10px;
+        }
+
+        .wow { color: #FF1493; font-size: 2.5em; display: inline-block; margin: 0 10px; }
+        .such { color: #1E90FF; font-size: 2.5em; display: inline-block; margin: 0 10px; }
+        .very { color: #FFD700; font-size: 2.5em; display: inline-block; margin: 0 10px; }
+        .so { color: #FF69B4; font-size: 2.5em; display: inline-block; margin: 0 10px; }
+        .much { color: #00CED1; font-size: 2.5em; display: inline-block; margin: 0 10px; }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            border: 5px dashed #FF69B4;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-btn {
+            padding: 15px 25px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            border: 3px solid #FF1493;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-family: 'Comic Sans MS', cursive;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 3px 3px 0px rgba(0,0,0,0.2);
+        }
+
+        .nav-btn:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 6px 6px 0px rgba(0,0,0,0.2);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(135deg, #FF1493, #FF69B4);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: linear-gradient(135deg, #FFFACD 0%, #FFE4B5 100%);
+            border: 3px dashed #FF69B4;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 5px 5px 0px rgba(0,0,0,0.1);
+        }
+
+        .card h2 {
+            color: #FF1493;
+            font-size: 2em;
+            text-shadow: 2px 2px 0px #FFD700;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            color: #1E90FF;
+            font-size: 1.5em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        textarea, input[type="text"], input[type="number"], input[type="file"], select {
+            width: 100%;
+            padding: 12px;
+            background: white;
+            border: 3px solid #00CED1;
+            border-radius: 15px;
+            font-family: 'Comic Sans MS', cursive;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        textarea:focus, input:focus, select:focus {
+            outline: none;
+            border-color: #FF1493;
+            box-shadow: 0 0 15px #FF1493;
+            transform: scale(1.02);
+        }
+
+        .btn {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #00CED1, #87CEEB);
+            border: 3px solid #1E90FF;
+            border-radius: 15px;
+            cursor: pointer;
+            font-family: 'Comic Sans MS', cursive;
+            font-weight: bold;
+            font-size: 1em;
+            margin: 5px;
+            transition: all 0.3s;
+            box-shadow: 3px 3px 0px rgba(0,0,0,0.2);
+        }
+
+        .btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0px rgba(0,0,0,0.2);
+        }
+
+        .btn:active {
+            transform: translate(0, 0);
+            box-shadow: 1px 1px 0px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #FFB6C1, #FFC0CB);
+            border-color: #FF69B4;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+
+        .output-box {
+            background: linear-gradient(135deg, #F0FFFF, #E0FFFF);
+            border: 3px dashed #00CED1;
+            border-radius: 15px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            color: #333;
+            min-height: 80px;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-break: break-word;
+            margin-top: 10px;
+            box-shadow: inset 2px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .iframe-container {
+            background: white;
+            border: 3px solid #FF1493;
+            border-radius: 20px;
+            padding: 15px;
+            margin-top: 20px;
+            display: none;
+            box-shadow: 5px 5px 0px rgba(0,0,0,0.1);
+        }
+
+        .iframe-container.show {
+            display: block;
+        }
+
+        .iframe-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-bottom: 3px dashed #FFD700;
+        }
+
+        .iframe-header h3 {
+            margin: 0;
+            color: #FF1493;
+        }
+
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: 3px dashed #00CED1;
+            border-radius: 15px;
+            background: white;
+        }
+
+        .loading {
+            text-align: center;
+            color: #FF1493;
+            font-size: 1.5em;
+            padding: 20px;
+            display: none;
+            animation: pulse 1s infinite;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .message {
+            padding: 15px;
+            border-radius: 15px;
+            margin: 15px 0;
+            font-size: 1.1em;
+            display: none;
+            border: 3px solid;
+        }
+
+        .message.show {
+            display: block;
+        }
+
+        .success {
+            background: #98FB98;
+            border-color: #00AA00;
+            color: #005500;
+        }
+
+        .error {
+            background: #FFB6C1;
+            border-color: #FF1493;
+            color: #990033;
+        }
+
+        .info {
+            background: #FFFACD;
+            border: 3px dashed #FFD700;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+        }
+
+        .color-preview {
+            width: 100%;
+            height: 100px;
+            border: 3px dashed #00CED1;
+            border-radius: 15px;
+            margin-top: 10px;
+            box-shadow: inset 2px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .counter {
+            text-align: right;
+            color: #FF1493;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .doge-text {
+            font-size: 1.3em;
+            font-weight: bold;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+            margin: 10px 0;
+        }
+
+        @media (max-width: 768px) {
+            .doge-title { font-size: 2.5em; }
+            .wow, .such, .very, .so, .much { font-size: 1.5em; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .grid-4 { grid-template-columns: repeat(2, 1fr); }
+            iframe { height: 400px; }
+            .nav-tabs { flex-direction: column; }
+            .nav-btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="doge-header">
+        <div class="doge-title">
+            <span class="such">such</span>
+            <span class="wow">unblocker</span>
+            <span class="very">very</span>
+            <span class="so">tools</span>
+            <span class="much">wow</span>
+        </div>
+        <p style="font-size: 1.5em; color: #FF69B4; font-weight: bold;">🐕 All-in-One Ultimate Tool Suite 🐕</p>
+    </div>
+
+    <div class="container">
+        <!-- NAVIGATION TABS -->
+        <div class="nav-tabs">
+            <button class="nav-btn active" onclick="switchTab('home')">🏠 Home</button>
+            <button class="nav-btn" onclick="switchTab('unblocker')">🌐 Unblocker</button>
+            <button class="nav-btn" onclick="switchTab('text')">📝 Text</button>
+            <button class="nav-btn" onclick="switchTab('code')">💻 Code</button>
+            <button class="nav-btn" onclick="switchTab('generators')">⚡ Generate</button>
+            <button class="nav-btn" onclick="switchTab('convert')">🔄 Convert</button>
+            <button class="nav-btn" onclick="switchTab('security')">🔒 Security</button>
+            <button class="nav-btn" onclick="switchTab('files')">📁 Files</button>
+        </div>
+
+        <!-- HOME SECTION -->
+        <div id="home" class="section active">
+            <div class="card">
+                <h2>🐕 Welcome to Such Unblocker WOW! 🐕</h2>
+                <div class="doge-text" style="color: #FF1493;">
+                    such welcome<br>
+                    many features<br>
+                    very tool<br>
+                    so all-in-one<br>
+                    WOW
+                </div>
+                <div class="info">
+                    <h3 style="margin-top: 0;">✨ Features Included:</h3>
+                    <p>🌐 <strong>Web Unblocker</strong> - Access any website</p>
+                    <p>📝 <strong>Text Tools</strong> - Convert, reverse, encode text</p>
+                    <p>💻 <strong>Code Editor</strong> - Write HTML/CSS/JS with live preview</p>
+                    <p>⚡ <strong>Generators</strong> - Passwords, UUIDs, colors, random numbers</p>
+                    <p>🔄 <strong>Converters</strong> - Format conversion tools</p>
+                    <p>🔒 <strong>Security</strong> - Hashing and encoding</p>
+                    <p>📁 <strong>File Loader</strong> - Preview files</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNBLOCKER SECTION -->
+        <div id="unblocker" class="section">
+            <div class="card">
+                <h2>🌐 Web Unblocker</h2>
+                <div class="info">such unblock, many websites, very accessible, WOW!</div>
+                <div id="unblockerMsg" class="message"></div>
+                <label>Enter Website URL:</label>
+                <input type="text" id="unblockerUrl" placeholder="example.com or https://example.com" onkeypress="if(event.key==='Enter') unblockWebsite()">
+                <div class="button-group">
+                    <button class="btn" onclick="unblockWebsite()">🚀 Unblock</button>
+                    <button class="btn btn-secondary" onclick="closeUnblocker()">Close</button>
+                </div>
+                <div id="unblockerLoading" class="loading">🐕 Loading... such wow...</div>
+                <div id="unblockerContainer" class="iframe-container">
+                    <div class="iframe-header">
+                        <h3>📺 Preview</h3>
+                        <button class="btn btn-secondary" style="padding: 8px 15px; font-size: 0.9em;" onclick="closeUnblocker()">✕</button>
+                    </div>
+                    <iframe id="unblockerFrame"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- TEXT TOOLS SECTION -->
+        <div id="text" class="section">
+            <div class="grid-2">
+                <div class="card">
+                    <h2>📝 Text Input</h2>
+                    <textarea id="textInput" placeholder="Enter text..." onkeyup="updateCounter()"></textarea>
+                    <div class="counter"><span id="charCount">0</span> chars | <span id="wordCount">0</span> words</div>
+                </div>
+                <div class="card">
+                    <h2>📊 Output</h2>
+                    <div class="output-box" id="textOutput">Result here... WOW</div>
+                </div>
+            </div>
+            <div class="card">
+                <h3>⚙️ Text Operations</h3>
+                <div class="button-group">
+                    <button class="btn" onclick="textUpper()">UPPERCASE</button>
+                    <button class="btn" onclick="textLower()">lowercase</button>
+                    <button class="btn" onclick="textReverse()">Reverse</button>
+                    <button class="btn" onclick="textTrim()">Remove Spaces</button>
+                    <button class="btn" onclick="textBase64Enc()">Base64 Encode</button>
+                    <button class="btn" onclick="textBase64Dec()">Base64 Decode</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- CODE EDITOR SECTION -->
+        <div id="code" class="section">
+            <div class="grid-2">
+                <div class="card">
+                    <h2>💻 HTML/CSS/JS</h2>
+                    <textarea id="codeInput" placeholder="&lt;!DOCTYPE html&gt;&#10;&lt;html&gt;&#10;&lt;body&gt;&#10;&lt;h1&gt;Hello WOW&lt;/h1&gt;&#10;&lt;/body&gt;"></textarea>
+                </div>
+                <div class="card">
+                    <h2>👁️ Preview</h2>
+                    <div class="button-group">
+                        <button class="btn" onclick="renderCode()">🔄 Render</button>
+                        <button class="btn btn-secondary" onclick="clearCode()">Clear</button>
+                    </div>
+                </div>
+            </div>
+            <div id="codeContainer" class="iframe-container">
+                <div class="iframe-header">
+                    <h3>🎨 Live Preview</h3>
+                    <button class="btn btn-secondary" style="padding: 8px 15px; font-size: 0.9em;" onclick="closeCode()">✕</button>
+                </div>
+                <iframe id="codeFrame" sandbox="allow-same-origin allow-scripts"></iframe>
+            </div>
+        </div>
+
+        <!-- GENERATORS SECTION -->
+        <div id="generators" class="section">
+            <div class="grid-2">
+                <div class="card">
+                    <h2>🔐 Password</h2>
+                    <label>Length:</label>
+                    <input type="number" id="passLen" value="16" min="8" max="128">
+                    <button class="btn" onclick="genPassword()">Generate</button>
+                    <div class="output-box" id="passOut">Click to generate...</div>
+                </div>
+                <div class="card">
+                    <h2>🆔 UUID</h2>
+                    <button class="btn" onclick="genUUID()" style="width: 100%; margin-top: 20px;">Generate UUID</button>
+                    <div class="output-box" id="uuidOut">Click to generate...</div>
+                </div>
+                <div class="card">
+                    <h2>🎨 Color</h2>
+                    <button class="btn" onclick="genColor()" style="width: 100%; margin-top: 20px;">Random Color</button>
+                    <div class="output-box" id="colorOut">#000000</div>
+                    <div id="colorPrev" class="color-preview"></div>
+                </div>
+                <div class="card">
+                    <h2>🎲 Random #</h2>
+                    <label>Min:</label>
+                    <input type="number" id="minNum" value="1">
+                    <label>Max:</label>
+                    <input type="number" id="maxNum" value="100">
+                    <button class="btn" onclick="genRandom()">Generate</button>
+                    <div class="output-box" id="randOut">0</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONVERTERS SECTION -->
+        <div id="convert" class="section">
+            <div class="grid-2">
+                <div class="card">
+                    <h2>🔄 Decimal ↔ Hex</h2>
+                    <label>Decimal:</label>
+                    <input type="text" id="decInput" placeholder="255">
+                    <button class="btn" onclick="decToHex()">To Hex</button>
+                    <div class="output-box" id="hexOut">#000000</div>
+                </div>
+                <div class="card">
+                    <h2>🔄 Hex ↔ Decimal</h2>
+                    <label>Hex:</label>
+                    <input type="text" id="hexInput" placeholder="#FF0000">
+                    <button class="btn" onclick="hexToDec()">To Decimal</button>
+                    <div class="output-box" id="decOut">0</div>
+                </div>
+                <div class="card">
+                    <h2>🔄 JSON Format</h2>
+                    <textarea id="jsonIn" placeholder='{"key":"value"}'></textarea>
+                    <button class="btn" onclick="formatJson()">Format</button>
+                    <div class="output-box" id="jsonOut">{}</div>
+                </div>
+                <div class="card">
+                    <h2>🔄 URL Encode</h2>
+                    <input type="text" id="urlEncIn" placeholder="Enter text or URL">
+                    <button class="btn" onclick="encUrl()">Encode</button>
+                    <button class="btn" onclick="decUrl()">Decode</button>
+                    <div class="output-box" id="urlOut">Result...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECURITY SECTION -->
+        <div id="security" class="section">
+            <div class="grid-2">
+                <div class="card">
+                    <h2>🔒 SHA256 Hash</h2>
+                    <textarea id="hashIn" placeholder="Enter text..."></textarea>
+                    <button class="btn" onclick="hashSha256()">Hash</button>
+                    <div class="output-box" id="hashOut">Hash here...</div>
+                </div>
+                <div class="card">
+                    <h2>🔐 Base64 Encode</h2>
+                    <textarea id="b64EncIn" placeholder="Enter text..."></textarea>
+                    <button class="btn" onclick="encBase64()">Encode</button>
+                    <div class="output-box" id="b64EncOut">Encoded...</div>
+                </div>
+                <div class="card">
+                    <h2>🔑 Base64 Decode</h2>
+                    <textarea id="b64DecIn" placeholder="Enter base64..."></textarea>
+                    <button class="btn" onclick="decBase64()">Decode</button>
+                    <div class="output-box" id="b64DecOut">Decoded...</div>
+                </div>
+                <div class="card">
+                    <h2>🛡️ URL Security</h2>
+                    <input type="text" id="urlSecIn" placeholder="Enter URL...">
+                    <button class="btn" onclick="encUrlSec()">Encode</button>
+                    <button class="btn" onclick="decUrlSec()">Decode</button>
+                    <div class="output-box" id="urlSecOut">Result...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FILES SECTION -->
+        <div id="files" class="section">
+            <div class="card">
+                <h2>📁 File Loader</h2>
+                <div class="info">such upload, very preview, many files, WOW!</div>
+                <div id="fileMsg" class="message"></div>
+                <input type="file" id="fileInput" accept=".html,.txt,.md,.css,.js,.json">
+                <div class="button-group">
+                    <button class="btn" onclick="loadFile()">📂 Load</button>
+                    <button class="btn btn-secondary" onclick="closeFile()">Close</button>
+                </div>
+                <div id="fileContainer" class="iframe-container">
+                    <div class="iframe-header">
+                        <h3>📄 File Preview</h3>
+                        <button class="btn btn-secondary" style="padding: 8px 15px; font-size: 0.9em;" onclick="closeFile()">✕</button>
+                    </div>
+                    <iframe id="fileFrame" sandbox="allow-same-origin allow-scripts"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        // TAB SWITCHING
+        // ============================================================
+        function switchTab(tabName) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function showMsg(id, text, type) {
+            const msg = document.getElementById(id);
+            msg.textContent = text;
+            msg.className = `message show ${type}`;
+            setTimeout(() => msg.classList.remove('show'), 4000);
+        }
+
+        // ============================================================
+        // WEB UNBLOCKER
+        // ============================================================
+        function unblockWebsite() {
+            let url = document.getElementById('unblockerUrl').value.trim();
+            if (!url) {
+                showMsg('unblockerMsg', '❌ such empty, enter URL, WOW', 'error');
+                return;
+            }
+            if (!url.startsWith('http')) url = 'https://' + url;
+            
+            document.getElementById('unblockerLoading').classList.add('show');
+            const frame = document.getElementById('unblockerFrame');
+            frame.src = `/proxy?url=${encodeURIComponent(url)}`;
+            
+            frame.onload = () => {
+                document.getElementById('unblockerLoading').classList.remove('show');
+                document.getElementById('unblockerContainer').classList.add('show');
+                showMsg('unblockerMsg', '✅ such loaded, very website, WOW!', 'success');
+            };
+            
+            frame.onerror = () => {
+                document.getElementById('unblockerLoading').classList.remove('show');
+                showMsg('unblockerMsg', '❌ much fail, such blocked, WOW', 'error');
+            };
+        }
+
+        function closeUnblocker() {
+            document.getElementById('unblockerContainer').classList.remove('show');
+            document.getElementById('unblockerFrame').src = '';
+        }
+
+        // ============================================================
+        // TEXT TOOLS
+        // ============================================================
+        function updateCounter() {
+            const text = document.getElementById('textInput').value;
+            document.getElementById('charCount').textContent = text.length;
+            document.getElementById('wordCount').textContent = text.trim().split(/\s+/).filter(w => w).length;
+        }
+
+        function textUpper() { document.getElementById('textOutput').textContent = document.getElementById('textInput').value.toUpperCase(); }
+        function textLower() { document.getElementById('textOutput').textContent = document.getElementById('textInput').value.toLowerCase(); }
+        function textReverse() { document.getElementById('textOutput').textContent = document.getElementById('textInput').value.split('').reverse().join(''); }
+        function textTrim() { document.getElementById('textOutput').textContent = document.getElementById('textInput').value.replace(/\s+/g, ''); }
+        function textBase64Enc() { document.getElementById('textOutput').textContent = btoa(document.getElementById('textInput').value); }
+        function textBase64Dec() { try { document.getElementById('textOutput').textContent = atob(document.getElementById('textInput').value); } catch(e) { document.getElementById('textOutput').textContent = '❌ Invalid Base64'; } }
+
+        // ============================================================
+        // CODE EDITOR
+        // ============================================================
+        function renderCode() {
+            const code = document.getElementById('codeInput').value;
+            if (!code.trim()) {
+                alert('📝 Enter code first, WOW!');
+                return;
+            }
+            document.getElementById('codeFrame').srcdoc = code;
+            document.getElementById('codeContainer').classList.add('show');
+        }
+
+        function clearCode() {
+            document.getElementById('codeInput').value = '';
+            document.getElementById('codeFrame').srcdoc = '';
+            document.getElementById('codeContainer').classList.remove('show');
+        }
+
+        function closeCode() {
+            document.getElementById('codeContainer').classList.remove('show');
+        }
+
+        // ============================================================
+        // GENERATORS
+        // ============================================================
+        function genPassword() {
+            const len = parseInt(document.getElementById('passLen').value) || 16;
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
+            let pass = '';
+            for (let i = 0; i < len; i++) pass += chars.charAt(Math.floor(Math.random() * chars.length));
+            document.getElementById('passOut').textContent = pass;
+        }
+
+        function genUUID() {
+            const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+                const r = Math.random() * 16 | 0;
+                return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+            });
+            document.getElementById('uuidOut').textContent = uuid;
+        }
+
+        function genColor() {
+            const color = '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0').toUpperCase();
+            document.getElementById('colorOut').textContent = color;
+            document.getElementById('colorPrev').style.backgroundColor = color;
+        }
+
+        function genRandom() {
+            const min = parseInt(document.getElementById('minNum').value);
+            const max = parseInt(document.getElementById('maxNum').value);
+            const rand = Math.floor(Math.random() * (max - min + 1)) + min;
+            document.getElementById('randOut').textContent = rand;
+        }
+
+        // ============================================================
+        // CONVERTERS
+        // ============================================================
+        function decToHex() {
+            const dec = parseInt(document.getElementById('decInput').value);
+            document.getElementById('hexOut').textContent = '#' + dec.toString(16).toUpperCase().padStart(6, '0');
+        }
+
+        function hexToDec() {
+            const hex = document.getElementById('hexInput').value.replace('#', '');
+            document.getElementById('decOut').textContent = parseInt(hex, 16);
+        }
+
+        function formatJson() {
+            try {
+                const json = JSON.parse(document.getElementById('jsonIn').value);
+                document.getElementById('jsonOut').textContent = JSON.stringify(json, null, 2);
+            } catch(e) {
+                document.getElementById('jsonOut').textContent = '❌ Invalid JSON';
+            }
+        }
+
+        function encUrl() { document.getElementById('urlOut').textContent = encodeURIComponent(document.getElementById('urlEncIn').value); }
+        function decUrl() { try { document.getElementById('urlOut').textContent = decodeURIComponent(document.getElementById('urlEncIn').value); } catch(e) { document.getElementById('urlOut').textContent = '❌ Error'; } }
+
+        // ============================================================
+        // SECURITY
+        // ============================================================
+        async function hashSha256() {
+            const text = document.getElementById('hashIn').value;
+            const encoded = new TextEncoder().encode(text);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', encoded);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            document.getElementById('hashOut').textContent = hash;
+        }
+
+        function encBase64() { document.getElementById('b64EncOut').textContent = btoa(document.getElementById('b64EncIn').value); }
+        function decBase64() { try { document.getElementById('b64DecOut').textContent = atob(document.getElementById('b64DecIn').value); } catch(e) { document.getElementById('b64DecOut').textContent = '❌ Invalid'; } }
+        function encUrlSec() { document.getElementById('urlSecOut').textContent = encodeURIComponent(document.getElementById('urlSecIn').value); }
+        function decUrlSec() { try { document.getElementById('urlSecOut').textContent = decodeURIComponent(document.getElementById('urlSecIn').value); } catch(e) { document.getElementById('urlSecOut').textContent = '❌ Error'; } }
+
+        // ============================================================
+        // FILE LOADER
+        // ============================================================
+        function loadFile() {
+            const input = document.getElementById('fileInput');
+            if (!input.files.length) {
+                showMsg('fileMsg', '❌ such empty, select file, WOW', 'error');
+                return;
+            }
+            const file = input.files[0];
+            const reader = new FileReader();
+            reader.onload = e => {
+                document.getElementById('fileFrame').srcdoc = e.target.result;
+                document.getElementById('fileContainer').classList.add('show');
+                showMsg('fileMsg', '✅ such loaded, very file, WOW!', 'success');
+            };
+            reader.onerror = () => showMsg('fileMsg', '❌ much error, WOW', 'error');
+            reader.readAsText(file);
+        }
+
+        function closeFile() {
+            document.getElementById('fileContainer').classList.remove('show');
+            document.getElementById('fileFrame').srcdoc = '';
+        }
+    </script>
+</body>
+</html>
